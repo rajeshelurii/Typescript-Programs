@@ -2,7 +2,7 @@
 
 ## Algorithims
 
-###1. **Binary Search Algorith(Iterative method)**
+### 1. **Binary Search Algorith(Iterative method)**
 
 ```typescript
      function binarySearch(arr: number[], target: number): number {
@@ -20,7 +20,7 @@
      console.log(BinarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 8)); // Outputs: 7
      
 ```
-###2. **Binary Search Algorith(Recursive method)**
+### 2. **Binary Search Algorith(Recursive method)**
 
 ```typescript
      function binarySearchRecursive(arr: number[], target: number, left: number = 0, right: number = arr.length - 1): number {
@@ -37,4 +37,4 @@
 
 ```
 
-###3. Linear Search
+### 3. Linear Search

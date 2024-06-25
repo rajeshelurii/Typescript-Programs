@@ -151,3 +151,101 @@ const arr = [3, 5, 7, 2, 8];
 console.log(findMax(arr)); // Output: 8
 ```
 
+### 4. Singly Linked List(Linked List Implementation)?
+
+```typesccript
+class ListNode {
+    value: number;
+    next: ListNode | null = null;
+
+    constructor(value: number) {
+        this.value = value;
+    }
+}
+
+class LinkedList {
+    head: ListNode | null = null;
+
+    // Append a new node with the given value to the end of the list
+    append(value: number): void {
+        const newNode = new ListNode(value);
+        if (this.head === null) {
+            this.head = newNode;
+        } else {
+            let current = this.head;
+            while (current.next !== null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    // Prepend a new node with the given value to the beginning of the list
+    prepend(value: number): void {
+        const newNode = new ListNode(value);
+        newNode.next = this.head;
+        this.head = newNode;
+    }
+
+    // Delete the first node that contains the given value
+    delete(value: number): void {
+        if (this.head === null) return;
+
+        if (this.head.value === value) {
+            this.head = this.head.next;
+            return;
+        }
+
+        let current = this.head;
+        while (current.next !== null && current.next.value !== value) {
+            current = current.next;
+        }
+
+        if (current.next !== null) {
+            current.next = current.next.next;
+        }
+    }
+
+    // Search for a node with the given value
+    search(value: number): ListNode | null {
+        let current = this.head;
+        while (current !== null && current.value !== value) {
+            current = current.next;
+        }
+        return current;
+    }
+
+    // Print all values in the list
+    printList(): void {
+        let current = this.head;
+        while (current !== null) {
+            console.log(current.value);
+            current = current.next;
+        }
+    }
+}
+
+const list = new LinkedList();
+list.append(10);
+list.append(20);
+list.append(30);
+
+console.log("Initial List:");
+list.printList(); // Output: 10 20 30
+
+list.prepend(5);
+console.log("After Prepending 5:");
+list.printList(); // Output: 5 10 20 30
+
+list.delete(20);
+console.log("After Deleting 20:");
+list.printList(); // Output: 5 10 30
+
+const node = list.search(10);
+if (node) {
+    console.log("Found Node:", node.value); // Output: Found Node: 10
+} else {
+    console.log("Node not found");
+}
+
+```

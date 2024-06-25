@@ -153,7 +153,7 @@ console.log(findMax(arr)); // Output: 8
 
 ### 4. Singly Linked List(Linked List Implementation)?
 
-```typesccript
+```typescript
 class ListNode {
     value: number;
     next: ListNode | null = null;

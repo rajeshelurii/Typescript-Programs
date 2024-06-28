@@ -249,3 +249,137 @@ if (node) {
 }
 
 ```
+
+### 5. Binary Tree
+
+``` typescript
+class TreeNode<T> {
+    public data: T;
+    public left: TreeNode<T> | null;
+    public right: TreeNode<T> | null;
+
+    constructor(data: T) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class BinaryTree<T> {
+    private root: TreeNode<T> | null;
+
+    constructor() {
+        this.root = null;
+    }
+
+    // Insert a new node
+    insert(data: T): void {
+        const newNode = new TreeNode(data);
+        if (this.root === null) {
+            this.root = newNode;
+        } else {
+            this.insertNode(this.root, newNode);
+        }
+    }
+
+    private insertNode(node: TreeNode<T>, newNode: TreeNode<T>): void {
+        if (newNode.data < node.data) {
+            if (node.left === null) {
+                node.left = newNode;
+            } else {
+                this.insertNode(node.left, newNode);
+            }
+        } else {
+            if (node.right === null) {
+                node.right = newNode;
+            } else {
+                this.insertNode(node.right, newNode);
+            }
+        }
+    }
+
+    // In-order traversal
+    inOrderTraverse(callback: (data: T) => void): void {
+        this.inOrderTraverseNode(this.root, callback);
+    }
+
+    private inOrderTraverseNode(node: TreeNode<T> | null, callback: (data: T) => void): void {
+        if (node !== null) {
+            this.inOrderTraverseNode(node.left, callback);
+            callback(node.data);
+            this.inOrderTraverseNode(node.right, callback);
+        }
+    }
+
+    // Pre-order traversal
+    preOrderTraverse(callback: (data: T) => void): void {
+        this.preOrderTraverseNode(this.root, callback);
+    }
+
+    private preOrderTraverseNode(node: TreeNode<T> | null, callback: (data: T) => void): void {
+        if (node !== null) {
+            callback(node.data);
+            this.preOrderTraverseNode(node.left, callback);
+            this.preOrderTraverseNode(node.right, callback);
+        }
+    }
+
+    // Post-order traversal
+    postOrderTraverse(callback: (data: T) => void): void {
+        this.postOrderTraverseNode(this.root, callback);
+    }
+
+    private postOrderTraverseNode(node: TreeNode<T> | null, callback: (data: T) => void): void {
+        if (node !== null) {
+            this.postOrderTraverseNode(node.left, callback);
+            this.postOrderTraverseNode(node.right, callback);
+            callback(node.data);
+        }
+    }
+
+    // Search for a node with the given data
+    search(data: T): boolean {
+        return this.searchNode(this.root, data) !== null;
+    }
+
+    private searchNode(node: TreeNode<T> | null, data: T): TreeNode<T> | null {
+        if (node === null) {
+            return null;
+        }
+        if (data < node.data) {
+            return this.searchNode(node.left, data);
+        } else if (data > node.data) {
+            return this.searchNode(node.right, data);
+        } else {
+            return node;
+        }
+    }
+}
+```
+
+``` typescript
+const tree = new BinaryTree<number>();
+
+tree.insert(8);
+tree.insert(3);
+tree.insert(10);
+tree.insert(1);
+tree.insert(6);
+tree.insert(4);
+tree.insert(7);
+tree.insert(14);
+tree.insert(13);
+
+console.log('In-order traversal:');
+tree.inOrderTraverse(data => console.log(data));
+
+console.log('Pre-order traversal:');
+tree.preOrderTraverse(data => console.log(data));
+
+console.log('Post-order traversal:');
+tree.postOrderTraverse(data => console.log(data));
+
+console.log('Search for 6:', tree.search(6)); // true
+console.log('Search for 15:', tree.search(15)); // false
+
+```
